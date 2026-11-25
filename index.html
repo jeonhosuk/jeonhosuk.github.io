@@ -98,13 +98,53 @@ section{scroll-margin-top:calc(var(--gnb) + 8px)}
 .axis div{display:flex;justify-content:space-between;color:var(--ink-3);font-size:.75rem}
 
 /* career */
-.job{display:grid;grid-template-columns:180px minmax(0,1fr);gap:24px;padding-block:28px;border-bottom:1px solid var(--line)}
+.job{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);padding-block:32px;border-bottom:1px solid var(--line)}
 .job:last-child{border-bottom:0}
-.job .when b{display:block;font-weight:600}
-.job .when span{color:var(--blue);font-size:var(--fs-s);font-weight:600}
-.job h3{font-size:var(--fs-l);font-weight:800;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.job h3 small{font-size:var(--fs-s);font-weight:500;color:var(--ink-3)}
-.job .role{margin-top:6px;color:var(--ink-2)}
+.job .when{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:var(--fs-s)}
+.job .when b{font-weight:700;color:var(--ink)}
+.job .when span{color:var(--blue);font-weight:600}
+.job .big{margin-top:14px;font-size:clamp(1.625rem,1rem + 1.6vw,2.25rem);font-weight:800;letter-spacing:-.035em;line-height:1.28}
+.job .co{margin-top:14px;color:var(--ink-3);font-size:var(--fs-s)}
+.job .co b{color:var(--ink);font-size:var(--fs-m);font-weight:800;margin-right:8px}
+.job .role{margin-top:8px;color:var(--ink-2);max-width:32em}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:28px;border-top:1px solid var(--line)}
+.facts div{padding:16px 12px 0 0;display:flex;flex-direction:column;justify-content:space-between}
+.facts div+div{padding-left:16px;border-left:1px solid var(--line)}
+.facts dt{font-size:.8125rem;color:var(--ink-3);line-height:1.4}
+.facts dd{margin-top:6px;font-size:var(--fs-s);font-weight:700;color:var(--ink);white-space:nowrap}
+.facts dd b{font-size:clamp(1.75rem,1.3rem + 1.2vw,2.25rem);font-weight:800;letter-spacing:-.03em;color:var(--blue);margin-right:2px}
+.job-projs .proj:first-child{margin-top:0}
+.job-top{align-self:start}
+@media (min-width:961px){.js .cs .job-top{position:sticky;top:calc(var(--gnb) + 32px)}}
+/* career slider (js only) */
+.cs-tabs{display:none}
+.cs-foot{display:none}
+.js .cs-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;background:#e6eaf1;border-radius:16px;margin-bottom:16px}
+.cs-tabs button{appearance:none;border:0;background:transparent;border-radius:12px;min-height:64px;padding:8px 12px;cursor:pointer;font:inherit;color:var(--ink-3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:background-color .25s,color .25s,box-shadow .25s}
+.cs-tabs button b{font-size:var(--fs-b);font-weight:800;letter-spacing:-.02em}
+.cs-tabs button span{font-size:.8125rem;font-variant-numeric:tabular-nums}
+.cs-tabs button:hover{color:var(--ink)}
+.cs-tabs button[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(27,40,80,.08)}
+.cs-tabs button[aria-selected="true"] span{color:var(--blue);font-weight:600}
+.js .cs-view{background:#fff;border-radius:24px;box-shadow:0 12px 40px rgba(27,40,80,.07);padding:clamp(24px,4vw,48px);overflow:clip;touch-action:pan-y}
+.js .cs .job{display:none;padding-block:0;border-bottom:0}
+.js .cs .job.on{display:grid}
+.js .cs .job.on > *{animation:csIn .6s cubic-bezier(.16,1,.3,1) both}
+.js .cs .job.on > .job-projs{animation-delay:.08s}
+.js .cs.back .job.on > *{animation-name:csBack}
+@keyframes csIn{from{opacity:0;transform:translateX(56px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+@keyframes csBack{from{opacity:0;transform:translateX(-56px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.js .cs-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px}
+.cs-foot .cnt{font-weight:700;color:var(--ink-3);font-size:var(--fs-s)}
+.cs-foot .cnt b{color:var(--ink)}
+.cs-btn{appearance:none;font:inherit;display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:999px;border:1px solid var(--line-strong);background:#fff;color:var(--ink);font-weight:700;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,transform .15s}
+.cs-btn svg{width:18px;height:18px;flex:none}
+.cs-btn:hover:not(:disabled){border-color:var(--blue);color:var(--blue)}
+.cs-btn:active:not(:disabled){transform:scale(.97)}
+.cs-btn:disabled{opacity:.4;cursor:default}
+.cs-btn.next{background:var(--blue);border-color:var(--blue);color:#fff}
+.cs-btn.next:hover:not(:disabled){background:#2149c9;border-color:#2149c9;color:#fff}
+.cs-btn.prev{width:48px;padding:0;justify-content:center}
 .proj{margin-top:20px}
 .proj + .proj{margin-top:12px}
 .proj summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:700;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:#fff;transition:border-color .15s,background-color .15s}
@@ -148,6 +188,8 @@ section{scroll-margin-top:calc(var(--gnb) + 8px)}
 .prog i{width:18px;height:4px;border-radius:999px;background:var(--line-strong);transition:background-color .4s,width .4s cubic-bezier(.16,1,.3,1)}
 .prog i.done{background:var(--blue-line)}
 .prog i.now{background:var(--blue);width:28px}
+@media (prefers-reduced-motion: reduce){.js .cs .job.on > *{animation:csFade .2s linear both}}
+@keyframes csFade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion: reduce){.stage .frame,.stage .frame.on{transition:opacity .2s linear;transform:none;filter:none}}
 .js .story.live .step:not(.on) h3,.js .story.live .step:not(.on) p,.js .story.live .step:not(.on) ul.pts{color:var(--ink-3)}
 .js .story.live .step:not(.on) ul.pts b{color:var(--ink-3);background:var(--sub)}
@@ -291,7 +333,7 @@ section{scroll-margin-top:calc(var(--gnb) + 8px)}
   .hero-grid,.story,.svc-grid,.skill-grid,.study-grid,.two,.ai-list.cols,.study-list.cols{grid-template-columns:minmax(0,1fr)}
   .ai-list.cols li:nth-child(2),.study-list.cols li:nth-child(2){border-top:1px solid var(--line)}
   .summary{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .job{grid-template-columns:minmax(0,1fr);gap:8px}
+  .job{grid-template-columns:minmax(0,1fr);gap:28px}
   .step{min-height:0;padding-block:28px}
   .sheet{grid-template-columns:minmax(0,1fr)}
   .gnb .btn{display:none}
@@ -305,6 +347,15 @@ section{scroll-margin-top:calc(var(--gnb) + 8px)}
   .tabs a{justify-content:center;padding:0;font-size:.8125rem;min-width:0;letter-spacing:-.01em}
   .tabs .lg{display:none}.tabs .sm{display:inline}
   .proj summary{flex-wrap:wrap}
+  .w{display:none}
+  .job .co b{display:block;margin-bottom:2px}
+  .facts div{padding-right:8px}
+  .facts div+div{padding-left:10px}
+  .facts dt{font-size:.75rem}
+  .cs-tabs button{min-height:56px;padding:6px 4px}
+  .cs-tabs button b{font-size:.875rem}
+  .cs-tabs button span{font-size:.75rem}
+  .cs-btn{padding:0 16px}
   .proj summary .p{margin-left:0;flex-basis:100%;order:3}
   .code-pair{grid-template-columns:minmax(0,1fr)}
   .code pre{min-height:0}
@@ -392,13 +443,18 @@ section{scroll-margin-top:calc(var(--gnb) + 8px)}
 
 <section class="sec sub" id="career" aria-labelledby="ch">
   <div class="wrap">
-    <div class="sec-head"><h2 id="ch">경력</h2><span class="meta num">총 15년 9개월</span></div>
+    <div class="sec-head"><h2 id="ch">경력</h2><span class="meta num">총 15년 9개월</span><p>회사마다 한 장씩 넘겨 볼 수 있습니다. 프로젝트를 누르면 자세한 내용이 열립니다.</p></div>
 
-    <article class="job">
-      <div class="when"><b class="num">2024.03 ~ 재직중</b><span>IT개발팀 · 과장</span></div>
-      <div>
-        <h3>에이치디씨랩스(주) <small>부동산 데이터 API 개발 · 운영</small></h3>
+    <div class="cs" id="cs">
+    <article class="job" id="job-hdc" data-label="에이치디씨랩스" data-span="2024 ~ 현재">
+      <header class="job-top">
+        <p class="when num"><b>2024.03 ~ 재직중</b><span>IT개발팀 · 과장</span></p>
+        <h3 class="big">건설사 다섯 곳이 쓰는<br class="w"> 부동산 솔루션을 맡고 있습니다</h3>
+        <p class="co"><b>에이치디씨랩스(주)</b>부동산 데이터 API 개발 · 운영</p>
         <p class="role">부동산 데이터 API 개발과 운영을 총괄하고 레거시 ASP와 MS-SQL을 새 구조로 옮기는 일을 이끕니다.</p>
+        <dl class="facts"><div><dt>쓰는 건설사</dt><dd class="num"><b data-n="5">5</b>곳</dd></div><div><dt>세금 계산 API</dt><dd class="num"><b data-n="6">6</b>종</dd></div><div><dt>MariaDB 이전</dt><dd class="num">약 <b data-n="20">20</b>개</dd></div></dl>
+      </header>
+      <div class="job-projs">
         <details class="proj" open>
           <summary>RIS 부동산 솔루션 개발 <span class="p num">2026.05 ~ 현재 · PL</span></summary>
           <div class="body">
@@ -458,11 +514,15 @@ section{scroll-margin-top:calc(var(--gnb) + 8px)}
       </div>
     </article>
 
-    <article class="job">
-      <div class="when"><b class="num">2020.10 ~ 2024.03</b><span>IT개발팀 · 과장 · 3년 6개월</span></div>
-      <div>
-        <h3>부동산114(주) <small>포털 웹 · 모바일, 부동산 정보 API</small></h3>
+    <article class="job" id="job-r114" data-label="부동산114" data-span="2020 ~ 2024">
+      <header class="job-top">
+        <p class="when num"><b>2020.10 ~ 2024.03</b><span>IT개발팀 · 과장 · 3년 6개월</span></p>
+        <h3 class="big">제휴사가 쓰던 ASP API를<br class="w"> Spring으로 옮겼습니다</h3>
+        <p class="co"><b>부동산114(주)</b>포털 웹 · 모바일, 부동산 정보 API</p>
         <p class="role">부동산 포털 웹과 모바일을 개발하고 부동산 정보 API를 새 구조로 바꿨습니다. 계열사 이동으로 회사명이 바뀌었습니다.</p>
+        <dl class="facts"><div><dt>근무 기간</dt><dd class="num"><b data-n="3">3</b>년 <b data-n="6">6</b>개월</dd></div><div><dt>제휴사 쪽 수정</dt><dd class="num"><b data-n="0">0</b>건</dd></div><div><dt>맡은 제휴 API</dt><dd class="num"><b data-n="3">3</b>곳</dd></div></dl>
+      </header>
+      <div class="job-projs">
         <details class="proj" open>
           <summary>RFS 부동산 정보 API 전환 <span class="p num">2022.12 ~ 2024.03</span></summary>
           <div class="body">
@@ -487,11 +547,15 @@ section{scroll-margin-top:calc(var(--gnb) + 8px)}
       </div>
     </article>
 
-    <article class="job">
-      <div class="when"><b class="num">2011.03 ~ 2020.10</b><span>IT개발 · 과장 · 9년 8개월</span></div>
-      <div>
-        <h3>(주)우리두리 <small>여행 플랫폼 보물섬투어</small></h3>
+    <article class="job" id="job-tour" data-label="우리두리" data-span="2011 ~ 2020">
+      <header class="job-top">
+        <p class="when num"><b>2011.03 ~ 2020.10</b><span>IT개발 · 과장 · 9년 8개월</span></p>
+        <h3 class="big">여행사 ERP와 홈페이지를<br class="w"> 직접 만들고 운영했습니다</h3>
+        <p class="co"><b>(주)우리두리</b>여행 플랫폼 보물섬투어</p>
         <p class="role">보물섬투어 웹 리뉴얼과 사내 ERP 개발, 서버와 DB 운영 전반을 맡았습니다.</p>
+        <dl class="facts"><div><dt>근무 기간</dt><dd class="num"><b data-n="9">9</b>년 <b data-n="8">8</b>개월</dd></div><div><dt>홈페이지 리뉴얼</dt><dd class="num"><b data-n="2">2</b>회</dd></div><div><dt>2014 기획 비중</dt><dd class="num"><b data-n="70">70</b>%</dd></div></dl>
+      </header>
+      <div class="job-projs">
         <details class="proj" open>
           <summary>ERP 신규 개발 · 홈페이지 리뉴얼 <span class="p num">2016 ~ 2017 · 1년 6개월</span></summary>
           <div class="body">
@@ -522,6 +586,7 @@ section{scroll-margin-top:calc(var(--gnb) + 8px)}
         </details>
       </div>
     </article>
+    </div>
   </div>
 </section>
 
@@ -954,6 +1019,76 @@ rs.Close : conn.Close   <span class="c">' 오류가 나면 연결이 남음</spa
   steps.forEach(s => io.observe(s));
   setup(); wide.addEventListener('change', setup);
   let ft; addEventListener('resize', () => { clearTimeout(ft); ft = setTimeout(() => { if (story.classList.contains('live')) fit(); }, 150); });
+
+  const cs = document.getElementById('cs');
+  const jobs = [...cs.querySelectorAll('.job')];
+  const tabs = document.createElement('div');
+  tabs.className = 'cs-tabs'; tabs.setAttribute('role', 'tablist'); tabs.setAttribute('aria-label', '회사');
+  const view = document.createElement('div'); view.className = 'cs-view';
+  jobs.forEach((j, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.id = 'tab-' + j.id; b.setAttribute('aria-controls', j.id);
+    b.innerHTML = '<b></b><span></span>';
+    b.querySelector('b').textContent = j.dataset.label; b.querySelector('span').textContent = j.dataset.span;
+    b.addEventListener('click', () => go(i));
+    tabs.appendChild(b);
+    j.setAttribute('role', 'tabpanel'); j.setAttribute('aria-labelledby', b.id);
+    view.appendChild(j);
+  });
+  const arrow = d => `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+  const foot = document.createElement('div'); foot.className = 'cs-foot';
+  foot.innerHTML = `<button type="button" class="cs-btn prev" aria-label="이전 회사">${arrow('M12 4l-6 6 6 6')}</button><span class="cnt num"><b>1</b> / ${jobs.length}</span><button type="button" class="cs-btn next"><span></span>${arrow('M8 4l6 6-6 6')}</button>`;
+  cs.append(tabs, view, foot);
+  const prevB = foot.querySelector('.prev'), nextB = foot.querySelector('.next');
+  prevB.addEventListener('click', () => go(cur - 1, true));
+  nextB.addEventListener('click', () => go(cur + 1, true));
+  const still = matchMedia('(prefers-reduced-motion: reduce)');
+  function count(j) {
+    j.querySelectorAll('[data-n]').forEach(el => {
+      const n = +el.dataset.n;
+      if (still.matches || n === 0) { el.textContent = n; return; }
+      const t0 = performance.now(), dur = 700;
+      const step = t => { const k = Math.min(1, (t - t0) / dur); el.textContent = Math.round(n * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+      el.textContent = 0; requestAnimationFrame(step);
+    });
+  }
+  let cur = -1, seen = false;
+  new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { seen = true; count(jobs[cur]); o.disconnect(); } }, { threshold: .3 }).observe(view);
+  function go(i, fromFoot) {
+    if (i < 0 || i >= jobs.length || i === cur) return;
+    cs.classList.toggle('back', i < cur);
+    cur = i;
+    jobs.forEach((j, k) => { j.classList.toggle('on', k === i); j.hidden = k !== i; });
+    [...tabs.children].forEach((b, k) => { b.setAttribute('aria-selected', k === i ? 'true' : 'false'); b.tabIndex = k === i ? 0 : -1; });
+    foot.querySelector('.cnt b').textContent = i + 1;
+    prevB.disabled = i === 0;
+    nextB.disabled = i === jobs.length - 1;
+    nextB.querySelector('span').textContent = i === jobs.length - 1 ? '마지막 회사' : '다음 · ' + jobs[i + 1].dataset.label;
+    if (seen) count(jobs[i]);
+    if (fromFoot) {
+      const top = tabs.getBoundingClientRect().top;
+      const gnb = document.querySelector('.gnb').offsetHeight;
+      if (top < gnb) scrollTo({ top: scrollY + top - gnb - 16, behavior: still.matches ? 'auto' : 'smooth' });
+    }
+  }
+  tabs.addEventListener('keydown', e => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    const n = (cur + d + jobs.length) % jobs.length;
+    go(n); tabs.children[n].focus();
+  });
+  let sx = 0, sy = 0;
+  view.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  view.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(cur + (dx < 0 ? 1 : -1), true);
+  }, { passive: true });
+  function fromHash() {
+    const k = jobs.findIndex(j => '#' + j.id === location.hash);
+    if (k >= 0) { go(k); cs.closest('section').scrollIntoView(); }
+  }
+  go(0); fromHash(); addEventListener('hashchange', fromHash);
 
   document.getElementById('print').addEventListener('click', () => window.print());
 })();
